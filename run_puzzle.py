@@ -95,8 +95,6 @@ def runpuzzle(params):
 
 def argsToParams(args):
     """
-    RQ1. implementation of Reuse of Satisfiable subsets for ous incremental
-    in similar way to ocus incremental.
     """
     if args.explanation_computer == ExplanationComputer.MUS.name:
         params = MUSParams()
