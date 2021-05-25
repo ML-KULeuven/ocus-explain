@@ -68,15 +68,12 @@ class OCUSExplain(CSPExplain, BestStepComputer):
 
         # time spent
         t_opt,t_sat,t_grow  = [], [], []
-        print("F", F)
-        print("A", A)
 
         while(True):
             topt = time.time()
 
             # COMPUTING OPTIMAL HITTING SET
             HS = self.hittingset_solver.CondOptHittingSet()
-            print("hs", HS)
             # print('hs=', HS)
             t_opt.append(time.time() -topt)
             nHS += 1
@@ -106,8 +103,7 @@ class OCUSExplain(CSPExplain, BestStepComputer):
 
             tgrow = time.time()
             SS = self.grow(f=f, A=A, HS=HS, HS_model=HS_model)
-            print("SS", SS)
-            print(F-SS)
+
             t_grow.append(time.time() - tgrow)
             nGROW += 1
 

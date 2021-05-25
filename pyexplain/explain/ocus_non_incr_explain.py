@@ -32,7 +32,6 @@ class OCUSExplainNotIncremental(OCUSExplain, BestStepComputer):
             I (set): A partial interpretation such that I \subseteq Iend.
             sat (pysat.Solver): A SAT solver initialized with a CNF.
         """
-        print("beststep!!!!")
 
         self.I = set(I)
 

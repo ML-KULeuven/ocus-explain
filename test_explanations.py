@@ -28,8 +28,8 @@ PUZZLE_FUNS = {
 }
 
 ALL_EXPLANATION_COMPUTERS = {
-    "OCUS+Incr. HS": (COusNonIncrParams(), OCUSExplainNotIncremental),
-    "OCUS": (COusParams(), OCUSExplain),
+    "OCUS+Incr. HS": (COusParams(), OCUSExplain),
+    "OCUS": (COusNonIncrParams(), OCUSExplainNotIncremental),
     "OUS+SS. caching": (OusParams(), GreedyExplain),
     "OUS+Lit. Incr. HS":(OusIncrNaiveParams(), GreedyIncrNaiveExplain),
     "OUS":(OusParams(reuse_SSes=False), GreedyExplain),
