@@ -37,6 +37,7 @@ def cost_puzzle(U, I, cost_clue):
     bij/trans/clues = subset of user variables w/ specific cost.
     """
     litsU = set(abs(l) for l in U) | set(-abs(l) for l in U)
+    assert all(i in U or -i in U for i in I), "Making sure all literals are in user defined variables"
 
     I0 = set(I)
 

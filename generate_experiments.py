@@ -123,22 +123,23 @@ def COusNonIncrParamsSS(output_folder: str):
             for grow in [Grow.SAT, Grow.SUBSETMAX, Grow.MAXSAT]:
                 if grow is Grow.MAXSAT:
                     for weighing in [Weighing.UNIFORM, Weighing.INVERSE, Weighing.POSITIVE]:
-                        params = COusNonIncrParams()
+                        for maxsat_polarity in [True, False]:
+                            params = COusNonIncrParams()
 
-                        params.grow = grow
-                        params.maxsat_polarity = True
-                        params.interpretation = interpretation
-                        params.maxsat_weighing = weighing
+                            params.grow = grow
+                            params.maxsat_polarity = maxsat_polarity
+                            params.interpretation = interpretation
+                            params.maxsat_weighing = weighing
 
-                        # output
-                        params.instance = puzzle
-                        params.timeout = timeout
-                        fnow = datetime.now().strftime("%Y%m%d%H%M%S%f")
-                        params.output = output_folder + puzzle + '_' + fnow + ".json"
+                            # output
+                            params.instance = puzzle
+                            params.timeout = timeout
+                            fnow = datetime.now().strftime("%Y%m%d%H%M%S%f")
+                            params.output = output_folder + puzzle + '_' + fnow + ".json"
 
-                        # checking the setup
-                        params.checkParams()
-                        all_params.append(params)
+                            # checking the setup
+                            params.checkParams()
+                            all_params.append(params)
                 else:
                     params = COusNonIncrParams()
                     params.grow = grow
@@ -166,22 +167,23 @@ def COusParamsSS(output_folder: str):
             for grow in [Grow.SAT, Grow.SUBSETMAX, Grow.MAXSAT]:
                 if grow is Grow.MAXSAT:
                     for weighing in [Weighing.UNIFORM, Weighing.INVERSE, Weighing.POSITIVE]:
-                        params = COusParams()
+                        for maxsat_polarity in [True, False]:
+                            params = COusParams()
 
-                        params.grow = grow
-                        params.maxsat_polarity = True
-                        params.interpretation = interpretation
-                        params.maxsat_weighing = weighing
+                            params.grow = grow
+                            params.maxsat_polarity = maxsat_polarity
+                            params.interpretation = interpretation
+                            params.maxsat_weighing = weighing
 
-                        # output
-                        params.instance = puzzle
-                        params.timeout = timeout
-                        fnow = datetime.now().strftime("%Y%m%d%H%M%S%f")
-                        params.output = output_folder + puzzle + '_' + fnow + ".json"
+                            # output
+                            params.instance = puzzle
+                            params.timeout = timeout
+                            fnow = datetime.now().strftime("%Y%m%d%H%M%S%f")
+                            params.output = output_folder + puzzle + '_' + fnow + ".json"
 
-                        # checking the setup
-                        params.checkParams()
-                        all_params.append(params)
+                            # checking the setup
+                            params.checkParams()
+                            all_params.append(params)
                 else:
                     params = COusParams()
                     params.grow = grow
@@ -208,24 +210,25 @@ def OusIncrNaiveParamsSS(output_folder: str):
                 for grow in [Grow.SAT, Grow.SUBSETMAX, Grow.MAXSAT]:
                     if grow is Grow.MAXSAT:
                         for weighing in [Weighing.UNIFORM, Weighing.INVERSE, Weighing.POSITIVE]:
-                            params = OusIncrNaiveParams()
+                            for maxsat_polarity in [True, False]:
+                                params = OusIncrNaiveParams()
 
-                            params.grow = grow
-                            params.maxsat_polarity = True
-                            params.interpretation = interpretation
-                            params.maxsat_weighing = weighing
+                                params.grow = grow
+                                params.maxsat_polarity = maxsat_polarity
+                                params.interpretation = interpretation
+                                params.maxsat_weighing = weighing
 
-                            params.sort_literals = sort_literals
+                                params.sort_literals = sort_literals
 
-                            # output
-                            params.instance = puzzle
-                            params.timeout = timeout
-                            fnow = datetime.now().strftime("%Y%m%d%H%M%S%f")
-                            params.output = output_folder + puzzle + '_' + fnow + ".json"
+                                # output
+                                params.instance = puzzle
+                                params.timeout = timeout
+                                fnow = datetime.now().strftime("%Y%m%d%H%M%S%f")
+                                params.output = output_folder + puzzle + '_' + fnow + ".json"
 
-                            # checking the setup
-                            params.checkParams()
-                            all_params.append(params)
+                                # checking the setup
+                                params.checkParams()
+                                all_params.append(params)
                     else:
                         params = OusIncrNaiveParams()
                         params.grow = grow
@@ -255,24 +258,25 @@ def OusIncrSharedParamsSS(output_folder: str):
                 for grow in [Grow.SAT, Grow.SUBSETMAX, Grow.MAXSAT]:
                     if grow is Grow.MAXSAT:
                         for weighing in [Weighing.UNIFORM, Weighing.INVERSE, Weighing.POSITIVE]:
-                            params = OusIncrSharedParams()
+                            for maxsat_polarity in [True, False]:
+                                params = OusIncrSharedParams()
 
-                            params.grow = grow
-                            params.maxsat_polarity = True
-                            params.interpretation = interpretation
-                            params.maxsat_weighing = weighing
+                                params.grow = grow
+                                params.maxsat_polarity = maxsat_polarity
+                                params.interpretation = interpretation
+                                params.maxsat_weighing = weighing
 
-                            params.sort_literals = sort_literals
+                                params.sort_literals = sort_literals
 
-                            # output
-                            params.instance = puzzle
-                            params.timeout = timeout
-                            fnow = datetime.now().strftime("%Y%m%d%H%M%S%f")
-                            params.output = output_folder + puzzle + '_' + fnow + ".json"
+                                # output
+                                params.instance = puzzle
+                                params.timeout = timeout
+                                fnow = datetime.now().strftime("%Y%m%d%H%M%S%f")
+                                params.output = output_folder + puzzle + '_' + fnow + ".json"
 
-                            # checking the setup
-                            params.checkParams()
-                            all_params.append(params)
+                                # checking the setup
+                                params.checkParams()
+                                all_params.append(params)
                     else:
                         params = OusIncrSharedParams()
                         params.grow = grow
@@ -304,25 +308,26 @@ def OusParamsSS(output_folder: str):
                     for grow in [Grow.SAT, Grow.SUBSETMAX, Grow.MAXSAT]:
                         if grow is Grow.MAXSAT:
                             for weighing in [Weighing.UNIFORM, Weighing.INVERSE, Weighing.POSITIVE]:
-                                params = OusParams()
+                                for maxsat_polarity in [True, False]:
+                                    params = OusParams()
 
-                                params.grow = grow
-                                params.maxsat_polarity = True
-                                params.interpretation = interpretation
-                                params.maxsat_weighing = weighing
+                                    params.grow = grow
+                                    params.maxsat_polarity = maxsat_polarity
+                                    params.interpretation = interpretation
+                                    params.maxsat_weighing = weighing
 
-                                params.sort_literals = sort_literals
-                                params.reuse_SSes = reuse_SSes
+                                    params.sort_literals = sort_literals
+                                    params.reuse_SSes = reuse_SSes
 
-                                # output
-                                params.instance = puzzle
-                                params.timeout = timeout
-                                fnow = datetime.now().strftime("%Y%m%d%H%M%S%f")
-                                params.output = output_folder + puzzle + '_' + fnow + ".json"
+                                    # output
+                                    params.instance = puzzle
+                                    params.timeout = timeout
+                                    fnow = datetime.now().strftime("%Y%m%d%H%M%S%f")
+                                    params.output = output_folder + puzzle + '_' + fnow + ".json"
 
-                                # checking the setup
-                                params.checkParams()
-                                all_params.append(params)
+                                    # checking the setup
+                                    params.checkParams()
+                                    all_params.append(params)
                         else:
                             params = OusParams()
                             params.grow = grow
