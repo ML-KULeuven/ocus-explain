@@ -148,15 +148,16 @@ class COusNonIncrParams(BestStepParams):
         self.maxsat_polarity = True
     
 class OusParams(BestStepParams):
-    def __init__(self):
+    def __init__(self, reuse_SSes=True):
         super().__init__()
         self.explanation_computer = ExplanationComputer.OUS_SS
         self.grow = Grow.MAXSAT
         self.maxsat_weighing = Weighing.UNIFORM
         self.interpretation = Interpretation.INITIAL
-        self.reuse_SSes = False
+        self.reuse_SSes = reuse_SSes
         self.sort_literals = True
         self.maxsat_polarity = True
+    
     
 class OusIncrNaiveParams(BestStepParams):
     def __init__(self):

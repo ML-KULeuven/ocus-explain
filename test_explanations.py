@@ -1,4 +1,4 @@
-from pyexplain.solvers.params import COusParams,
+from pyexplain.solvers.params import COusParams, COusNonIncrParams, MUSParams, OusIncrNaiveParams, OusParams
 from pyexplain.explain.ocus_explain import OCUSExplain
 from pyexplain.explain.greedy_explain import GreedyExplain
 from pyexplain.explain.ocus_non_incr_explain import OCUSExplainNotIncremental
@@ -10,6 +10,7 @@ from pyexplain.examples.frietkot import *
 from pysat.formula import CNF
 
 INSTANCE = "simple"
+CONFIG = "OCUS+Incr. HS"
 
 PUZZLE_FUNS = {
     "origin-problem": originProblem,
@@ -26,15 +27,18 @@ PUZZLE_FUNS = {
     "simple": simpleProblem
 }
 
-EXPLANATION_COMPUTERS = {
-    "OCUS+Incr. HS": ,
-    "OCUS": ,
-    
+ALL_EXPLANATION_COMPUTERS = {
+    "OCUS+Incr. HS": (COusNonIncrParams(), OCUSExplainNotIncremental),
+    "OCUS": (COusParams(), OCUSExplain),
+    "OUS+SS. caching": (OusParams(), GreedyExplain),
+    "OUS+Lit. Incr. HS":(OusIncrNaiveParams(), GreedyIncrNaiveExplain),
+    "OUS":(OusParams(reuse_SSes=False), GreedyExplain),
+    "MUS": (MUSParams(), MUSExplain)
 }
 
 ## CONSTRAINED OUS + INCREMENTAL - automatically loads
 ## best configuration for running puzzle
-ocus_params = COusParams()
+params, explanation_computer = ALL_EXPLANATION_COMPUTERS[CONFIG]
 
 puzzleFun = PUZZLE_FUNS[INSTANCE]
 
@@ -53,9 +57,7 @@ I = set(x for lst in p_ass for x in lst)
 # weight/cost of explanations
 f = cost_puzzle(U, I, p_weights)
 
-ocus_expl_computer = OCUSExplain(C=o_cnf, params=ocus_params, matching_table=matching_table, verbose=True)
+ocus_expl_computer = explanation_computer(C=o_cnf, params=params, matching_table=matching_table, verbose=True)
 ocus_expl_computer.explain(U=U, f=f, I0=I)
 
-# ous_expl_computer = GreedyExplain(C=o_cnf, params=ousGreedy, matching_table=matching_table, verbose=True)
-# ous_expl_computer.explain(U=U, f=f, I0=I)
 
