@@ -64,8 +64,6 @@ class BaseParams(object):
             # implementation specific
             "reuse_SSes": None,
             "sort_literals": None,
-            # optux related explnaations
-            "disable_disjoint_mcses": None
         }
 
 class MUSParams(BaseParams):
@@ -135,11 +133,22 @@ class COusParams(BestStepParams):
         super().__init__()
         self.explanation_computer = ExplanationComputer.OCUS
 
+    def load_best_params(self):
+        self.grow = Grow.MAXSAT
+        self.maxsat_weighing = Weighing.UNIFORM
+        self.interpretation = Interpretation.ACTUAL
+        self.maxsat_polarity = True
+
 class COusNonIncrParams(BestStepParams):
     def __init__(self):
         # reinitialising the HS solver at every OUS call
         super().__init__()
         self.explanation_computer = ExplanationComputer.OCUS_NOT_INCREMENTAL
+    def load_best_params(self):
+        self.grow = Grow.MAXSAT
+        self.maxsat_weighing = Weighing.UNIFORM
+        self.interpretation = Interpretation.ACTUAL
+        self.maxsat_polarity = True
 
 class OusParams(BestStepParams):
     def __init__(self):
@@ -159,7 +168,19 @@ class OusIncrNaiveParams(BestStepParams):
         super().__init__()
         self.explanation_computer = ExplanationComputer.OUS_INCREMENTAL_NAIVE
 
+    def load_best_params(self):
+        self.grow = Grow.MAXSAT
+        self.maxsat_weighing = Weighing.UNIFORM
+        self.interpretation = Interpretation.ACTUAL
+        self.maxsat_polarity = True
+
 class OusIncrSharedParams(BestStepParams):
     def __init__(self):
         super().__init__()
         self.explanation_computer = ExplanationComputer.OUS_INCREMENTAL_SHARED
+
+    def load_best_params(self):
+        self.grow = Grow.MAXSAT
+        self.maxsat_weighing = Weighing.UNIFORM
+        self.interpretation = Interpretation.ACTUAL
+        self.maxsat_polarity = True

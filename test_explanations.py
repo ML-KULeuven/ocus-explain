@@ -6,32 +6,9 @@ from pyexplain.examples.frietkot import *
 from pysat.formula import CNF
 
 instance = "simple"
+
 ## CONSTRAINED OUS + INCREMENTAL
-
-ocusparams = COusParams()
-
-ocusparams.instance = instance
-ocusparams.output = "test.json"
-
-# running params
-ocusparams.grow = Grow.MAXSAT
-ocusparams.interpretation = Interpretation.ACTUAL
-ocusparams.maxsat_weighing = Weighing.UNIFORM
-# ocusparams.maxsat_polarity = True
-ocusparams.timeout = 60
-
-## Greedy reuse SSes 
-ousGreedy = OusParams()
-
-ousGreedy.instance = instance
-ousGreedy.grow = Grow.MAXSAT
-ousGreedy.interpretation = Interpretation.ACTUAL
-ousGreedy.maxsat_weighing = Weighing.UNIFORM
-ousGreedy.maxsat_polarity = True
-
-# ous-specific params
-ousGreedy.sort_literals = True
-ousGreedy.reuse_SSes = False
+ocus_params = COusParams.best_params()
 
 puzzle_funs = {
     "origin-problem": originProblem,
