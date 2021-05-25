@@ -132,8 +132,6 @@ class COusParams(BestStepParams):
         # reinitialising the HS solver at every OUS call
         super().__init__()
         self.explanation_computer = ExplanationComputer.OCUS
-
-    def load_best_params(self):
         self.grow = Grow.MAXSAT
         self.maxsat_weighing = Weighing.UNIFORM
         self.interpretation = Interpretation.ACTUAL
@@ -144,31 +142,26 @@ class COusNonIncrParams(BestStepParams):
         # reinitialising the HS solver at every OUS call
         super().__init__()
         self.explanation_computer = ExplanationComputer.OCUS_NOT_INCREMENTAL
-    def load_best_params(self):
         self.grow = Grow.MAXSAT
         self.maxsat_weighing = Weighing.UNIFORM
         self.interpretation = Interpretation.ACTUAL
         self.maxsat_polarity = True
-
+    
 class OusParams(BestStepParams):
     def __init__(self):
         super().__init__()
         self.explanation_computer = ExplanationComputer.OUS_SS
-
-    def load_best_params(self):
         self.grow = Grow.MAXSAT
         self.maxsat_weighing = Weighing.UNIFORM
         self.interpretation = Interpretation.INITIAL
         self.reuse_SSes = False
         self.sort_literals = True
         self.maxsat_polarity = True
-
+    
 class OusIncrNaiveParams(BestStepParams):
     def __init__(self):
         super().__init__()
         self.explanation_computer = ExplanationComputer.OUS_INCREMENTAL_NAIVE
-
-    def load_best_params(self):
         self.grow = Grow.MAXSAT
         self.maxsat_weighing = Weighing.UNIFORM
         self.interpretation = Interpretation.ACTUAL
@@ -178,8 +171,6 @@ class OusIncrSharedParams(BestStepParams):
     def __init__(self):
         super().__init__()
         self.explanation_computer = ExplanationComputer.OUS_INCREMENTAL_SHARED
-
-    def load_best_params(self):
         self.grow = Grow.MAXSAT
         self.maxsat_weighing = Weighing.UNIFORM
         self.interpretation = Interpretation.ACTUAL

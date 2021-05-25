@@ -1,0 +1,4 @@
+[submodule "cppy"]
+	path = cppy
+	url = https://github.com/tias/cppy.git
+	branch = tseitin
