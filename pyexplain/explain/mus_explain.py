@@ -61,7 +61,7 @@ class MUSExplain(CSPExplain):
             self.call_statistics["explained"] += len(Nbest)
 
             if self.verbose:
-                self.print_expl(Ibest)
+                self.get_expl(Ibest)
                 print(f"\nOptimal explanation \t {len(Iend-I)}/{len(Iend-I0)} \t {Ibest} => {Nbest}\n")
                 self.print_statistics()
 

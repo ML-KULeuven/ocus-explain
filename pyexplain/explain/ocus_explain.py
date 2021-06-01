@@ -1,3 +1,4 @@
+from pyexplain.utils.utils import get_expl
 import time
 from pyexplain.solvers.bestStep import BestStepComputer
 from pyexplain.solvers.hittingSet import CondOptHS
@@ -74,6 +75,8 @@ class OCUSExplain(CSPExplain, BestStepComputer):
 
             # COMPUTING OPTIMAL HITTING SET
             HS = self.hittingset_solver.CondOptHittingSet()
+            if self.verbose:
+                print("\nHS\t= ", get_expl(self.matching_table, HS))
             # print('hs=', HS)
             t_opt.append(time.time() -topt)
             nHS += 1
@@ -103,12 +106,16 @@ class OCUSExplain(CSPExplain, BestStepComputer):
 
             tgrow = time.time()
             SS = self.grow(f=f, A=A, HS=HS, HS_model=HS_model)
+            if self.verbose:
+                print("SS\t= ", get_expl(self.matching_table, SS))
 
             t_grow.append(time.time() - tgrow)
             nGROW += 1
 
             # complement
             C = F - SS
+            if self.verbose:
+                print("F \ SS\t= ", get_expl(self.matching_table, C))
 
             self.hittingset_solver.addCorrectionSet(C)
 

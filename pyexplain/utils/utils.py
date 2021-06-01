@@ -16,6 +16,30 @@ def add_assumptions(cnf):
     return cnf_ass, assumptions
 
 
+def get_expl(matching_table, Ibest, Nbest=None):
+    if matching_table is None:
+        return
+
+    s = ""
+    if not 'Transitivity constraint' in matching_table:
+        s = " /\\ ".join([matching_table[i] for i in Ibest])
+        if Nbest:
+            s += " =>" + ", ".join([matching_table[i] for i in Nbest])
+            s = "\nOptimal Explanation:\n--------------------\n\t"+ s
+    else:
+        for i in Ibest:
+            if(i in matching_table['Transitivity constraint']):
+                s+= "trans: " + str(i) + "\n"
+            elif(i in matching_table['Bijectivity']):
+                s+= "bij: " + str(i) + "\n"
+                print("bij", i)
+            elif(i in matching_table['clues']):
+                s+= "clues n°"+ matching_table['clues'][i] + "\n"
+            else:
+                s+= "Fact: " + str(i) + "\n"
+    return s
+
+
 def get_user_vars(cnf):
     """Flattens cnf into list of different variables.
 
@@ -38,8 +62,6 @@ def cost_puzzle(U, I, cost_clue):
     """
     litsU = set(abs(l) for l in U) | set(-abs(l) for l in U)
     assert all(i in U or -i in U for i in I), "Making sure all literals are in user defined variables"
-
-    I0 = set(I)
 
     def cost_lit(lit):
         if lit not in litsU:

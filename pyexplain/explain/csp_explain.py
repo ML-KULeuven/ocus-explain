@@ -1,3 +1,4 @@
+from pyexplain.utils.utils import get_expl
 import time
 from pyexplain.solvers.bestStep import optimalPropagate
 from ..solvers.params import BestStepParams, ExplanationComputer
@@ -160,29 +161,13 @@ class CSPExplain(object):
             self.call_statistics["explained"] += len(Nbest)
 
             if self.verbose:
-                self.print_expl(Ibest)
-                print(f"\nOptimal explanation \t {len(Iend-I)}/{len(Iend-I0)} \t {Ibest} => {Nbest}\n")
                 print(f"\n\tElapsed time=", round(time.time() - tstart_explain), "s")
-                # self.print_statistics()
+                print(get_expl(self.matching_table, Ibest, Nbest))
 
         self.time_statisitics["totalTime"] = time.time() - tstart_explain
 
     def print_statistics(self):
         print("texpl=", round(self.time_statisitics["explain"][-1], 2), "s\n")
-
-    def print_expl(self, Ibest):
-        if self.matching_table is None:
-            return
-
-        for i in Ibest:
-            if(i in self.matching_table['Transitivity constraint']):
-                print("trans", i)
-            elif(i in self.matching_table['Bijectivity']):
-                print("bij", i)
-            elif(i in self.matching_table['clues']):
-                print("clues n°",self. matching_table['clues'][i])
-            else:
-                print("Fact:", i)
 
     def to_json_expl(self, f, explanation):
         constraints = list(explanation["constraints"])
