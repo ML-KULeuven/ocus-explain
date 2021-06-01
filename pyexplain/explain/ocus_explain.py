@@ -75,7 +75,7 @@ class OCUSExplain(CSPExplain, BestStepComputer):
 
             # COMPUTING OPTIMAL HITTING SET
             HS = self.hittingset_solver.CondOptHittingSet()
-            if self.verbose:
+            if self.verbose > 1:
                 print("\nHS\t= ", get_expl(self.matching_table, HS))
             # print('hs=', HS)
             t_opt.append(time.time() -topt)
@@ -106,7 +106,7 @@ class OCUSExplain(CSPExplain, BestStepComputer):
 
             tgrow = time.time()
             SS = self.grow(f=f, A=A, HS=HS, HS_model=HS_model)
-            if self.verbose:
+            if self.verbose > 1:
                 print("SS\t= ", get_expl(self.matching_table, SS))
 
             t_grow.append(time.time() - tgrow)
@@ -114,7 +114,7 @@ class OCUSExplain(CSPExplain, BestStepComputer):
 
             # complement
             C = F - SS
-            if self.verbose:
+            if self.verbose > 1:
                 print("F \ SS\t= ", get_expl(self.matching_table, C))
 
             self.hittingset_solver.addCorrectionSet(C)

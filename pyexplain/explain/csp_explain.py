@@ -9,12 +9,12 @@ import json
 from pathlib import Path
 
 class CSPExplain(object):
-    def __init__(self, C: CNF, verbose=False, matching_table=None):
+    def __init__(self, C: CNF, verbose=0, matching_table=None):
         self.cnf = C
 
         self.verbose = verbose
 
-        if self.verbose:
+        if self.verbose > 0:
             print("Expl:")
             print("\tcnf:", len(C.clauses), C.nv)
             print("\n\tcnf:", C.clauses)
@@ -69,7 +69,7 @@ class CSPExplain(object):
 
     def preprocess(self, U: set, f, I0: set, Iend: set):
         # checking everything is correct
-        if self.verbose:
+        if self.verbose > 0:
             print("\tU:", len(U))
             print("\tf:", f)
             print("\tI0:", len(I0))
@@ -160,7 +160,7 @@ class CSPExplain(object):
             I |= Nbest
             self.call_statistics["explained"] += len(Nbest)
 
-            if self.verbose:
+            if self.verbose > 0:
                 print(f"\n\tElapsed time=", round(time.time() - tstart_explain), "s")
                 print(get_expl(self.matching_table, Ibest, Nbest))
 

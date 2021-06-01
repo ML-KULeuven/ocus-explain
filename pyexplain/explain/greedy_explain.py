@@ -87,7 +87,7 @@ class GreedyExplain(CSPExplain, BestStepComputer):
         # literal already found, remove its cost
         del self.best_costs[bestLit]
 
-        if self.verbose:
+        if self.verbose > 0:
             print('\t Average time to explanation=', round(sum(t_greedyBestStep)/len(t_greedyBestStep), 2), "s")
 
         # statistics
