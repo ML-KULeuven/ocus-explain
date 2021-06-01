@@ -1,6 +1,17 @@
-# Efficient Explaining CSPs with Unsatisfiable Subset Optimization
+# Efficiently Explaining CSPs with Unsatisfiable Subset Optimization
 
-This repo contains the code to the paper ```Efficient Explaining CSPs with Unsatisfiable Subset Optimization```.
+This repo contains the code to the paper accepted at IJCAI 21 [Efficiently Explaining CSPs with Unsatisfiable Subset Optimization](https://arxiv.org/pdf/2105.11763).
+
+To cite this paper, add the following temporary entry:
+
+    @misc{gamba2021efficiently,
+      title={Efficiently Explaining CSPs with Unsatisfiable Subset Optimization}, 
+      author={Emilio Gamba and Bart Bogaerts and Tias Guns},
+      year={2021},
+      eprint={2105.11763},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI}
+    }
 
 ## Abstract
 
