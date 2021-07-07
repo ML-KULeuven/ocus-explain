@@ -106,6 +106,7 @@ class OCUSExplain(CSPExplain, BestStepComputer):
 
             tgrow = time.time()
             SS = self.grow(f=f, A=A, HS=HS, HS_model=HS_model)
+
             if self.verbose > 1:
                 print("SS\t= ", get_expl(self.matching_table, SS))
 
