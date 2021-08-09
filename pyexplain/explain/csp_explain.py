@@ -106,6 +106,81 @@ class CSPExplain(object):
             "explained":0
         }
 
+    def explain_1_lit(self, lit, f, I0: set):
+        assert type(lit) is int, f"Type of given lit is {type(lit)} expected int."
+        assert type(I0) is set,  f"Type of given initial intepretation is {type(I0)} expected set."
+
+        U = set(abs(l) for l in I0) | set({abs(lit)})
+
+        tstart = time.time()
+        Iend = optimalPropagate(U=U, I=I0, sat=self.sat) & set([-lit, lit])
+        self.time_statisitics["prop"].append(time.time() - tstart)
+
+        assert lit in Iend, "Lit cannot be derived"
+
+        I = I0
+        tstart = time.time()
+        expl = self.bestStep(f, Iend, I)
+        self.time_statisitics["explain"].append(time.time() - tstart)
+
+        # difficulty of explanation
+        costExpl = sum(f(l) for l in expl)
+
+        # facts & constraints used
+        Ibest = I & expl
+
+        # New information derived "focused" on
+        tstart = time.time()
+        Nbest = optimalPropagate(U=U, I=Ibest, sat=self.sat) - I0
+        self.time_statisitics["prop"].append(time.time() - tstart)
+
+
+        return {
+            "constraints": list(Ibest),
+            "derived": list(Nbest),
+            "cost": costExpl
+        }
+
+    def explain_1_step(self, U: set, f, I0: set):
+        assert type(U) is int, f"Type of given User variables is {type(U)} expected set."
+        assert type(I0) is set,  f"Type of given initial intepretation is {type(I0)} expected set."
+
+        # check literals of I are all user vocabulary
+        assert all(True if abs(lit) in U else False for lit in I0), f"Part of supplied literals not in U (user variables): {lits for lit in I if lit not in U}"
+
+        # Initialise the sat solver with the cnf
+        assert self.sat.solve(assumptions=I0), f"CNF is unsatisfiable with given assumptions {I0}."
+
+        # Most precise intersection of all models of C project on U
+        tstart = time.time()
+        Iend = optimalPropagate(U=U, I=I0, sat=self.sat)
+        self.time_statisitics["prop"].append(time.time() - tstart)
+
+        # keep track of explanation config-specific information
+        tstart = time.time()
+        self.preprocess(U, f, I0, Iend)
+        self.time_statisitics["preprocess"] = time.time() - tstart
+
+        tstart = time.time()
+        expl = self.bestStep(f, Iend, I0)
+        self.time_statisitics["explain"].append(time.time() - tstart)
+
+        # difficulty of explanation
+        costExpl = sum(f(l) for l in expl)
+
+        # facts & constraints used
+        Ibest = I0 & expl
+
+        # New information derived "focused" on
+        tstart = time.time()
+        Nbest = optimalPropagate(U=U, I=Ibest, sat=self.sat) - I0
+        self.time_statisitics["prop"].append(time.time() - tstart)
+
+        return {
+            "constraints": list(Ibest),
+            "derived": list(Nbest),
+            "cost": costExpl
+        }
 
     def explain(self, U: set, f, I0: set):
         # check literals of I are all user vocabulary
@@ -134,6 +209,7 @@ class CSPExplain(object):
         while(len(Iend - I) > 0):
             # finding the next best epxlanation
             tstart = time.time()
+            # OUS/MUS
             expl = self.bestStep(f, Iend, I)
             self.time_statisitics["explain"].append(time.time() - tstart)
             self.time_statisitics["cumul_explain"].append(time.time() - tstart_explain)
