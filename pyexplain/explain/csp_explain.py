@@ -241,6 +241,7 @@ class CSPExplain(object):
                 print(get_expl(self.matching_table, Ibest, Nbest))
 
         self.time_statisitics["totalTime"] = time.time() - tstart_explain
+        return list(self.E)
 
     def print_statistics(self):
         print("texpl=", round(self.time_statisitics["explain"][-1], 2), "s\n")
