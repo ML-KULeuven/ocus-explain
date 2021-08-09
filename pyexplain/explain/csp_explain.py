@@ -111,12 +111,17 @@ class CSPExplain(object):
         assert type(I0) is set,  f"Type of given initial intepretation is {type(I0)} expected set."
 
         U = set(abs(l) for l in I0) | set({abs(lit)})
+        I = I0
 
         tstart = time.time()
         Iend = optimalPropagate(U=U, I=I0, sat=self.sat)
         self.time_statisitics["prop"].append(time.time() - tstart)
 
-        I = I0
+        # keep track of explanation config-specific information
+        tstart = time.time()
+        self.preprocess(U, f, I0, Iend)
+        self.time_statisitics["preprocess"] = time.time() - tstart
+
         tstart = time.time()
         expl = self.bestStep(f, Iend, I)
         self.time_statisitics["explain"].append(time.time() - tstart)
