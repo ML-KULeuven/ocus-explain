@@ -64,7 +64,19 @@ f = cost_puzzle(user_vars, I, weights)
 config_params = COusParams()
 
 ocus_expl_computer = OCUSExplain(C=CNF(from_clauses=all_constraints), params=config_params, matching_table=matching_table, verbose=True)
-ocus_expl_computer.explain(U=user_vars, f=f, I0=I)
+
+## Computing the Whole explanation sequence
+expl_sequence = ocus_expl_computer.explain(U=user_vars, f=f, I0=I)
+print("WHole sequence:\n", expl_sequence)
+
+## Computing next best explanation given current interpretation
+expl_1_step = ocus_expl_computer.explain_1_step(U=user_vars, f=f, I0=I)
+print("Explain 1 step:\n", expl_1_step)
+
+## Computing best explanation for given literal
+expl_1_lit = ocus_expl_computer.explain_1_lit(f=f, lit=2, I0=I)
+print("Explain 1 literal:\n", expl_1_lit)
+
 ocus_expl_computer.export_statistics(config_params, fname="output.json")
 
 # PUZZLE_FUNS = {"simple": simpleProblem}
