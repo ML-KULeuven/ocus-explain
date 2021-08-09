@@ -113,10 +113,8 @@ class CSPExplain(object):
         U = set(abs(l) for l in I0) | set({abs(lit)})
 
         tstart = time.time()
-        Iend = optimalPropagate(U=U, I=I0, sat=self.sat) & set([-lit, lit])
+        Iend = optimalPropagate(U=U, I=I0, sat=self.sat)
         self.time_statisitics["prop"].append(time.time() - tstart)
-
-        assert lit in Iend, "Lit cannot be derived"
 
         I = I0
         tstart = time.time()
