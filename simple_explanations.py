@@ -65,6 +65,7 @@ config_params = COusParams()
 
 ocus_expl_computer = OCUSExplain(C=CNF(from_clauses=all_constraints), params=config_params, matching_table=matching_table, verbose=True)
 ocus_expl_computer.explain(U=user_vars, f=f, I0=I)
+ocus_expl_computer.export_statistics(config_params, fname="output.json")
 
 # PUZZLE_FUNS = {"simple": simpleProblem}
 
