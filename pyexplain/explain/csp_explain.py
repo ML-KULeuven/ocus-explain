@@ -328,7 +328,7 @@ class CSPExplain(object):
             "explanation": self.E,
             'params': params.to_dict() if params is not None else dict()
         }
-        print(fname)
+        print("Statistics exported to", fname)
         if not Path(fname).parent.exists():
             Path(fname).parent.mkdir(parents=True)
 
