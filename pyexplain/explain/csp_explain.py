@@ -142,7 +142,7 @@ class CSPExplain(object):
         }
 
     def explain_1_step(self, U: set, f, I0: set):
-        assert type(U) is int, f"Type of given User variables is {type(U)} expected set."
+        assert type(U) is set, f"Type of given User variables is {type(U)} expected set."
         assert type(I0) is set,  f"Type of given initial intepretation is {type(I0)} expected set."
 
         # check literals of I are all user vocabulary
