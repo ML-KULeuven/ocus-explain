@@ -1,6 +1,17 @@
 # Efficiently Explaining CSPs with Unsatisfiable Subset Optimization
 
-This repo contains the code to the paper accepted at IJCAI 21 [Efficiently Explaining CSPs with Unsatisfiable Subset Optimization](https://arxiv.org/pdf/2105.11763).
+This repo contains the code of two papers: the conference version at IJCAI 2021 and the journal version at JAIR 2023.
+
+# JAIR 2023 code
+
+The repo with code and notebooks to run the experiments can be found in `jair2023/`, the code itself is in `jair2023/code/`.
+
+We highly recommend using this (newer) version of the code!
+
+
+# IJCAI 2021 code
+
+The rest of this README is about the code to the paper accepted at IJCAI 21 [Efficiently Explaining CSPs with Unsatisfiable Subset Optimization](https://arxiv.org/pdf/2105.11763).
 
 To cite this paper, add the following temporary entry:
 

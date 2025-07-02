@@ -13,7 +13,7 @@ class MUSExplain(CSPExplain):
 
     def explain(self, U: set, f, I0: set):
         # check literals of I are all user vocabulary
-        assert all(True if abs(lit) in U else False for lit in I0), f"Part of supplied literals not in U (user variables): {lits for lit in I if lit not in U}"
+        assert all(True if abs(lit) in U else False for lit in I0), f"Part of supplied literals not in U (user variables): {[lits for lit in I if lit not in U]}"
 
         # Initialise the sat solver with the cnf
         assert self.sat.solve(assumptions=I0), f"CNF is unsatisfiable with given assumptions {I0}."
